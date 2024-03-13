@@ -1,10 +1,10 @@
-export default function Options() {
+import Option from "./Option";
+export default function Options({ options }) {
   return (
     <div className="options">
-      <button className="btn btn-option">Angular</button>
-      <button className="btn btn-option">React</button>
-      <button className="btn btn-option">Svelte</button>
-      <button className="btn btn-option">Vue</button>
+      {options.map((option, i) => (
+        <Option option={option} key={i} />
+      ))}
     </div>
   );
 }

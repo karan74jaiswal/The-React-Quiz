@@ -1,9 +1,9 @@
 import Options from "./Options";
-const Question = function () {
+const Question = function ({ questionData }) {
   return (
     <>
-      <h4>Which is the most popular JavaScript framework?</h4>
-      <Options />
+      <h4>{questionData.question}</h4>
+      <Options options={questionData.options} />
     </>
   );
 };
