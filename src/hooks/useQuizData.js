@@ -54,6 +54,10 @@ function reducer(currentState, action) {
     case "finish":
       newState = {
         ...currentState,
+        highScore:
+          currentState.highScore >= currentState.currentPoint
+            ? currentState.highScore
+            : currentState.currentPoint,
         finished: true,
         selectedAnswer: null,
       };
@@ -64,6 +68,7 @@ function reducer(currentState, action) {
         isLoading: false,
         currentQuestion: null,
         questions: currentState.questions,
+        highScore: currentState.highScore,
         started: false,
         finished: false,
         selectedAnswer: null,
@@ -88,6 +93,7 @@ export default function useQuizData() {
       currentPoint,
       maximumPoints,
       selectedAnswer,
+      highScore,
     },
     dispatch,
   ] = useReducer(reducer, {
@@ -99,6 +105,7 @@ export default function useQuizData() {
     currentPoint: 0,
     maximumPoints: 0,
     selectedAnswer: null,
+    highScore: 0,
   });
 
   useEffect(() => {
@@ -126,6 +133,7 @@ export default function useQuizData() {
     currentPoint,
     maximumPoints,
     selectedAnswer,
+    highScore,
     dispatch,
   };
 }

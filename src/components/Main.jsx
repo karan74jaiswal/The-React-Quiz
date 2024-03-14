@@ -16,6 +16,7 @@ export default function Main() {
     currentPoint,
     maximumPoints,
     selectedAnswer,
+    highScore,
     dispatch,
   } = useQuizData();
 
@@ -60,6 +61,7 @@ export default function Main() {
       {finished && (
         <Result
           maximumPoints={maximumPoints}
+          highScore={highScore}
           currentPoints={currentPoint}
           reset={reset}
         />
