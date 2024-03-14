@@ -23,7 +23,25 @@ function reducer(currentState, action) {
       newState = {
         ...currentState,
         currentQuestion: 0,
+        secondsRemaining: currentState.questions.length * 30,
         started: true,
+      };
+      break;
+
+    case "updateTimer":
+      newState = {
+        ...currentState,
+        secondsRemaining: currentState.secondsRemaining - 1,
+        finished: currentState.secondsRemaining === 0,
+        // highScore:
+        //   currentState.secondsRemaining === 0 &&
+        //   currentState.highScore >= currentState.currentPoint
+        //     ? currentState.highScore
+        //     : currentState.currentPoint,
+        // selectedAnswer:
+        //   currentState.secondsRemaining === 0
+        //     ? null
+        //     : currentState.selectedAnswer,
       };
       break;
 
@@ -60,6 +78,7 @@ function reducer(currentState, action) {
             : currentState.currentPoint,
         finished: true,
         selectedAnswer: null,
+        secondsRemaining: null,
       };
       break;
 
@@ -77,6 +96,7 @@ function reducer(currentState, action) {
           (acc, question) => acc + question.points,
           0
         ),
+        secondsRemaining: currentState.questions.length * 30,
       };
   }
   return newState;
@@ -94,6 +114,7 @@ export default function useQuizData() {
       maximumPoints,
       selectedAnswer,
       highScore,
+      secondsRemaining,
     },
     dispatch,
   ] = useReducer(reducer, {
@@ -106,6 +127,7 @@ export default function useQuizData() {
     maximumPoints: 0,
     selectedAnswer: null,
     highScore: 0,
+    secondsRemaining: null,
   });
 
   useEffect(() => {
@@ -134,6 +156,7 @@ export default function useQuizData() {
     maximumPoints,
     selectedAnswer,
     highScore,
+    secondsRemaining,
     dispatch,
   };
 }

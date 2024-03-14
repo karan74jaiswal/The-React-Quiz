@@ -4,6 +4,7 @@ import Loader from "./Loader";
 import ProgressBar from "./ProgressBar";
 import Question from "./Question";
 import Result from "./Result";
+import Timer from "./Timer";
 import useQuizData from "../hooks/useQuizData";
 
 export default function Main() {
@@ -17,10 +18,12 @@ export default function Main() {
     maximumPoints,
     selectedAnswer,
     highScore,
+    secondsRemaining,
     dispatch,
   } = useQuizData();
 
   const startQuiz = () => dispatch({ type: "start" });
+  const updateTimer = () => dispatch({ type: "updateTimer" });
   const nextQuestion = () => {
     if (currentQuestion !== questions.length - 1) dispatch({ type: "next" });
     else dispatch({ type: "finish" });
@@ -55,6 +58,14 @@ export default function Main() {
             updatePoints={updatePoints}
             answer={selectedAnswer}
             handleAnswer={updateAnswer}
+          />
+          <Timer
+            answer={selectedAnswer}
+            next={nextQuestion}
+            questionNo={currentQuestion}
+            questions={questions.length}
+            secondsRemaining={secondsRemaining}
+            updateTimer={updateTimer}
           />
         </>
       )}

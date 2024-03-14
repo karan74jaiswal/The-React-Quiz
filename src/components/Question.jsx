@@ -1,12 +1,7 @@
-import { useState } from "react";
 import Options from "./Options";
-import Footer from "./Footer";
 const Question = function ({
   questionData,
-  next,
   updatePoints,
-  questionNo,
-  questions,
   answer,
   handleAnswer,
 }) {
@@ -23,18 +18,6 @@ const Question = function ({
         correctOption={questionData.correctOption}
         answer={answer}
       />
-      <Footer>
-        <>
-          <span className="timer">02:30</span>
-          {answer !== null ? (
-            <button className="btn btn-ui" onClick={next}>
-              {questionNo !== questions - 1 ? "Next" : "Finish"}
-            </button>
-          ) : (
-            ""
-          )}
-        </>
-      </Footer>
     </>
   );
 };
