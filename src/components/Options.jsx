@@ -1,9 +1,9 @@
 import Option from "./Option";
 export default function Options({
   options,
-  selectedOption,
   handleClick,
   correctOption,
+  answer,
 }) {
   return (
     <div className="options">
@@ -13,8 +13,8 @@ export default function Options({
           index={i}
           key={i}
           handleClick={handleClick}
-          disabled={selectedOption !== null ? true : false}
-          selectedOption={selectedOption}
+          disabled={answer !== null ? true : false}
+          answer={answer}
           correctOption={correctOption}
         />
       ))}

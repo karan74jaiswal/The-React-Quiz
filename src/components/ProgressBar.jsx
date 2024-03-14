@@ -3,14 +3,18 @@ const ProgressBar = function ({
   questions,
   points,
   maximumPoints,
+  answer,
 }) {
   return (
     <header>
       <div className="progress">
-        <progress max={questions - 1} value={questionNo - 1} />
+        <progress
+          max={questions}
+          value={answer !== null ? questionNo + 1 : questionNo}
+        />
 
         <p>
-          Question <strong>{questionNo}</strong> / {questions}
+          Question <strong>{questionNo + 1}</strong> / {questions}
         </p>
         <p>
           <strong>{points}</strong> / {maximumPoints}

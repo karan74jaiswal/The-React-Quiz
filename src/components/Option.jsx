@@ -3,13 +3,13 @@ export default function Option({
   index,
   handleClick,
   disabled,
-  selectedOption,
   correctOption,
+  answer,
 }) {
   function getClass(index) {
-    return selectedOption !== null
+    return answer !== null
       ? `${index === correctOption ? "correct" : "wrong"}  ${
-          selectedOption === index ? "answer" : ""
+          answer === index ? "answer" : ""
         }`
       : "";
   }

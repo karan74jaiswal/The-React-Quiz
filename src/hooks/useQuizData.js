@@ -27,10 +27,18 @@ function reducer(currentState, action) {
       };
       break;
 
+    case "handleAnswer":
+      newState = {
+        ...currentState,
+        selectedAnswer: action.payload,
+      };
+      break;
+
     case "next":
       newState = {
         ...currentState,
         currentQuestion: currentState.currentQuestion + 1,
+        selectedAnswer: null,
       };
       break;
 
@@ -42,10 +50,12 @@ function reducer(currentState, action) {
           currentState.questions[currentState.currentQuestion].points,
       };
       break;
+
     case "finish":
       newState = {
         ...currentState,
         finished: true,
+        selectedAnswer: null,
       };
       break;
 
@@ -56,6 +66,7 @@ function reducer(currentState, action) {
         questions: currentState.questions,
         started: false,
         finished: false,
+        selectedAnswer: null,
         currentPoint: 0,
         maximumPoints: currentState.questions.reduce(
           (acc, question) => acc + question.points,
@@ -76,6 +87,7 @@ export default function useQuizData() {
       finished,
       currentPoint,
       maximumPoints,
+      selectedAnswer,
     },
     dispatch,
   ] = useReducer(reducer, {
@@ -86,6 +98,7 @@ export default function useQuizData() {
     finished: false,
     currentPoint: 0,
     maximumPoints: 0,
+    selectedAnswer: null,
   });
 
   useEffect(() => {
@@ -112,6 +125,7 @@ export default function useQuizData() {
     finished,
     currentPoint,
     maximumPoints,
+    selectedAnswer,
     dispatch,
   };
 }

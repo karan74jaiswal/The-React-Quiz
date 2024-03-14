@@ -15,6 +15,7 @@ export default function Main() {
     finished,
     currentPoint,
     maximumPoints,
+    selectedAnswer,
     dispatch,
   } = useQuizData();
 
@@ -23,7 +24,8 @@ export default function Main() {
     if (currentQuestion !== questions.length - 1) dispatch({ type: "next" });
     else dispatch({ type: "finish" });
   };
-
+  const updateAnswer = (option) =>
+    dispatch({ type: "handleAnswer", payload: option });
   const updatePoints = () => dispatch({ type: "updatePoints" });
   const reset = () => dispatch("restart");
 
@@ -37,10 +39,11 @@ export default function Main() {
       {started && !finished && (
         <>
           <ProgressBar
-            questionNo={currentQuestion + 1}
+            questionNo={currentQuestion}
             questions={questions.length}
             points={currentPoint}
             maximumPoints={maximumPoints}
+            answer={selectedAnswer}
           />
           <Question
             questionNo={currentQuestion}
@@ -49,6 +52,8 @@ export default function Main() {
             key={questions[currentQuestion].id}
             next={nextQuestion}
             updatePoints={updatePoints}
+            answer={selectedAnswer}
+            handleAnswer={updateAnswer}
           />
         </>
       )}
