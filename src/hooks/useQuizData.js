@@ -33,15 +33,6 @@ function reducer(currentState, action) {
         ...currentState,
         secondsRemaining: currentState.secondsRemaining - 1,
         finished: currentState.secondsRemaining === 0,
-        // highScore:
-        //   currentState.secondsRemaining === 0 &&
-        //   currentState.highScore >= currentState.currentPoint
-        //     ? currentState.highScore
-        //     : currentState.currentPoint,
-        // selectedAnswer:
-        //   currentState.secondsRemaining === 0
-        //     ? null
-        //     : currentState.selectedAnswer,
       };
       break;
 
@@ -134,7 +125,12 @@ export default function useQuizData() {
     async function fetchQuestions() {
       try {
         const questions = await (
-          await fetch(`http://localhost:3001/questions`)
+          await fetch(process.env.REACT_APP_API_BASE_URL, {
+            headers: {
+              apikey: process.env.REACT_APP_API_KEY,
+              Authorization: `Bearer ${process.env.REACT_APP_API_KEY}`,
+            },
+          })
         ).json();
         dispatch({ type: "fetchQuestions", payload: questions });
       } catch (err) {
